@@ -1,0 +1,63 @@
+package modelo;
+
+import java.util.ArrayList;
+
+public class InformacionBasica {
+    
+    private String id;
+    private String nombre;
+    private String estado;
+    private String operador;
+    private String FPO;
+    private String tipoDeConexion;
+    private ArrayList<String> subestacionesRelacionadas;
+    private String tipoDeLinea;
+    private String acuerdoDeConexionCompartida;
+    
+    public InformacionBasica(String id, String nombre, String estado, String operador, String FPO, String tipoDeConexion, ArrayList subestacionesRelacionadas, String tipoDeLinea, String acuerdoDeConexionCompartida){
+        this.id=id;
+        this.nombre=nombre;
+        this.estado=estado;
+        this.operador=operador;
+        this.FPO=FPO;
+        this.tipoDeConexion=tipoDeConexion;
+        this.subestacionesRelacionadas=subestacionesRelacionadas;
+        this.tipoDeLinea=tipoDeLinea;
+        this.acuerdoDeConexionCompartida=acuerdoDeConexionCompartida;
+    }
+    
+    public InformacionBasica(InformacionBasica informacionBasica){
+        this.id=informacionBasica.getID();
+        this.nombre=informacionBasica.getNombre();
+        this.estado=informacionBasica.getEstado();
+        this.operador=informacionBasica.getOperador();
+        this.FPO=informacionBasica.getFPO();
+        this.tipoDeConexion=informacionBasica.getTipoConexion();
+        this.subestacionesRelacionadas=informacionBasica.getSubestacionesRelacionadas();
+        this.tipoDeLinea=informacionBasica.getTipoDeLinea();
+        this.acuerdoDeConexionCompartida=informacionBasica.getAcuerdoDeConexionCompartida();
+    }
+    
+    //getters
+    public String getID(){ return id; }
+    public String getNombre(){ return nombre; }
+    public String getEstado(){ return estado; }
+    public String getOperador(){ return operador; }
+    public String getFPO(){ return FPO; }
+    public String getTipoConexion(){ return tipoDeConexion; }
+    public ArrayList getSubestacionesRelacionadas(){ return subestacionesRelacionadas; }
+    public String getTipoDeLinea(){ return tipoDeLinea; }
+    public String getAcuerdoDeConexionCompartida(){ return acuerdoDeConexionCompartida; }
+    
+    //setters
+    public void setID(String id){ this.id=id; }
+    public void setNombre(String nombre){ this.nombre=nombre; }
+    public void setEstado(String estado){ this.estado=estado; }
+    public void setOperador(String operador){ this.operador=operador; }
+    public void setFPO(String FPO){ this.FPO=FPO; }
+    public void setTipoConexion(String tipoConexion){ this.tipoDeConexion=tipoConexion; }
+    //setters de subestaciones relacionadas pendiente
+    public void setTipoDeLinea(String tipoDeLinea){ this.tipoDeLinea=tipoDeLinea; }
+    public void setAcuerdoDeConexionCompartida(String acuerdoDeConexionCompartida){ this.acuerdoDeConexionCompartida=acuerdoDeConexionCompartida; }
+    
+}

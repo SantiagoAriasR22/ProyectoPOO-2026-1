@@ -12,7 +12,7 @@ public class CapacidadPorTramo {
     private double reactanciaX0;
     private double susceptanciaB0;
     private String comparteEstructura;
-    private ArrayList<String> circuitosCompartidos=null;
+    private ArrayList<String> circuitosCompartidos;
     private double resistenciaMutuaR0m;
     private double reactanciaMutuaX0m;
     
@@ -27,6 +27,19 @@ public class CapacidadPorTramo {
         this.circuitosCompartidos=circuitosCompartidos;
         this.resistenciaMutuaR0m=resistenciaMutuaR0m;
         this.reactanciaMutuaX0m=reactanciaMutuaX0m;
+    }
+    
+    public CapacidadPorTramo(CapacidadPorTramo capacidadPorTramo){
+        this.resistenciaR1=capacidadPorTramo.getResistenciaR1();
+        this.reactanciaX1=capacidadPorTramo.getReactanciaX1();
+        this.susceptanciaB1=capacidadPorTramo.getSusceptanciaB1();
+        this.resistenciaR0=capacidadPorTramo.getResistenciaR0();
+        this.reactanciaX0=capacidadPorTramo.getReactanciaX0();
+        this.susceptanciaB0=capacidadPorTramo.getSusceptanciaB0();
+        this.comparteEstructura=capacidadPorTramo.getComparteEstructura();
+        this.circuitosCompartidos=capacidadPorTramo.getCircuitosCompartidos();
+        this.resistenciaMutuaR0m=capacidadPorTramo.getResistenciaMutua();
+        this.reactanciaMutuaX0m=capacidadPorTramo.getReactanciaMutua();
     }
     
     //getters

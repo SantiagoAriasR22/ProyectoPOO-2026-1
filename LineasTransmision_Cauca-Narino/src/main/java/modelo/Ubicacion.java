@@ -13,6 +13,12 @@ public class Ubicacion {
         this.subAreaOperativa=subAreaOperativa;
     }
     
+    public Ubicacion(Ubicacion ubicacion){
+        this.departamento=ubicacion.getDepartamento();
+        this.municipio=ubicacion.getMunicipio();
+        this.subAreaOperativa=ubicacion.getSubAreaOperativa();
+    }
+    
     //getters
     public String getDepartamento(){ return departamento; }
     public String getMunicipio(){ return municipio; }
