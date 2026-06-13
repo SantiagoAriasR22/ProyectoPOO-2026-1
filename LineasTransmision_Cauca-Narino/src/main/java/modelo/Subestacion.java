@@ -12,7 +12,6 @@ public class Subestacion {
     private Ubicacion ubicacion;
     private double latitud;
     private double longitud;
-    private ElementosAsociados elementosAsociados;
     
     public Subestacion(String id, String nombre, ArrayList voltajeNominalDeOperacion, ArrayList operadores, Ubicacion ubicacion, double latitud, double longitud, ElementosAsociados elementosAsociados){
         this.id=id;
@@ -22,10 +21,9 @@ public class Subestacion {
         this.ubicacion=ubicacion;
         this.latitud=latitud;
         this.longitud=longitud;
-        this.elementosAsociados=elementosAsociados;
     }
     
-    public Subestacion(Subestacion subestacion){
+   /* public Subestacion(Subestacion subestacion){
         this.id=subestacion.getID();
         this.nombre=subestacion.getNombre();
         this.voltajeNominalDeOperacion=subestacion.getVoltajeNominal();
@@ -34,17 +32,15 @@ public class Subestacion {
         this.latitud=subestacion.getLatitud();
         this.longitud=subestacion.getLongitud();
         this.elementosAsociados=subestacion.getElementosAsociados();
-    }
+    }*/
     
     //getters
     public String getID(){ return id; }
     public String getNombre(){ return nombre; }
-    public ArrayList<Double> getVoltajeNominal(){ return voltajeNominalDeOperacion; }
-    public ArrayList getOperadores(){ return operadores; }
     public Ubicacion getUbicacion(){ return ubicacion; }
     public double getLatitud(){ return latitud; }
     public double getLongitud(){ return longitud; }
-    public ElementosAsociados getElementosAsociados(){ return elementosAsociados; }
+   
     
     //setters
     public void setID(String id){ this.id=id; }
