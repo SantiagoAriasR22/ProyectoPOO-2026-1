@@ -26,18 +26,6 @@ public class InformacionBasica {
         this.acuerdoDeConexionCompartida=acuerdoDeConexionCompartida;
     }
     
-    public InformacionBasica(InformacionBasica informacionBasica){
-        this.id=informacionBasica.getID();
-        this.nombre=informacionBasica.getNombre();
-        this.estado=informacionBasica.getEstado();
-        this.operador=informacionBasica.getOperador();
-        this.FPO=informacionBasica.getFPO();
-        this.tipoDeConexion=informacionBasica.getTipoConexion();
-        this.subestacionesRelacionadas=informacionBasica.getSubestacionesRelacionadas();
-        this.tipoDeLinea=informacionBasica.getTipoDeLinea();
-        this.acuerdoDeConexionCompartida=informacionBasica.getAcuerdoDeConexionCompartida();
-    }
-    
     //getters
     public String getID(){ return id; }
     public String getNombre(){ return nombre; }
@@ -56,7 +44,7 @@ public class InformacionBasica {
     public void setOperador(String operador){ this.operador=operador; }
     public void setFPO(String FPO){ this.FPO=FPO; }
     public void setTipoConexion(String tipoConexion){ this.tipoDeConexion=tipoConexion; }
-    //setters de subestaciones relacionadas pendiente
+    public void setSubestacionesRelacionadas(String subestacion){ this.subestacionesRelacionadas.add(subestacion); }
     public void setTipoDeLinea(String tipoDeLinea){ this.tipoDeLinea=tipoDeLinea; }
     public void setAcuerdoDeConexionCompartida(String acuerdoDeConexionCompartida){ this.acuerdoDeConexionCompartida=acuerdoDeConexionCompartida; }
     

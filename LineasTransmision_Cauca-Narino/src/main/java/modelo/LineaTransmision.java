@@ -1,52 +1,35 @@
 
 package modelo;
 
-import java.util.ArrayList;
-
 public class LineaTransmision {
     
-    private String id;
-    private String nombre;
-    private String operador;
-    private String estado;
-    private String fechaOperacion;
-    private String tipoOperacion;
-    private String subEstacionesRelacionadas;
-    private String tipoLinea;
-    private String acuerdoConexionCompartida;
-    private int voltajeNominal;
-    private int voltajeMaximo;
-    private double corrienteNominal;
-    private double limiteEmergencia;
-    private double limiteTermico;
-    private double longitudTotal;
+    private InformacionBasica informacionBasica;
+    private Capacidad capacidad;
     private Ubicacion ubicacion;
-    private double latitud;
-    private double longitud;
     
-    public LineaTransmision(String id, String nombre, String operador, String estado, String fechaOperacion, String tipoOperacion, String subEstacionesRelacionadas, String tipoLinea, String acuerdoConexionCompartida, int voltajeNominal, int voltajeMaximo, double corrienteNominal, double limiteEmergencia, double limiteTermico, double longitudTotal, Ubicacion ubicacion, double latitud, double longitud){
-        this.id=id;
-        this.nombre=nombre;
-        this.operador=operador;
-        this.estado=estado;
-        this.fechaOperacion=fechaOperacion;
-        this.tipoOperacion=tipoOperacion;
-        this.subEstacionesRelacionadas=subEstacionesRelacionadas;
-        this.tipoLinea=tipoLinea;
-        this.acuerdoConexionCompartida=acuerdoConexionCompartida;
-        this.voltajeNominal=voltajeNominal;
-        this.voltajeMaximo=voltajeMaximo;
-        this.corrienteNominal=corrienteNominal;
-        this.limiteEmergencia=limiteEmergencia;
-        this.limiteTermico=limiteTermico;
-        this.longitudTotal=longitudTotal;
+    public LineaTransmision(InformacionBasica informacionBasica, Capacidad capacidad, Ubicacion ubicacion){
+        this.informacionBasica=informacionBasica;
+        this.capacidad=capacidad;
         this.ubicacion=ubicacion;
-        this.latitud=latitud;
-        this.longitud=longitud;
-
+    }
+    
+    public String toCSV(){
+        
+         //el metodo String.join lo que hace es agrupar las subestaciones que estan guardados en el arraylist de subestacionesRelacionadas en una sola linea String, y a cada operador lo separa un -
+        String subestacionesRelacionadas = String.join(" - ", informacionBasica.getSubestacionesRelacionadas());
+        
+        //se concatenan toda la informacion de la linea de transmision en un solo string que va a ser retornando, siendo que cada valor esta separado por un ;
+        String linea = informacionBasica.getNombre()+";"+informacionBasica.getOperador()+";"+informacionBasica.getEstado()+";"+informacionBasica.getFPO()+";"+informacionBasica.getTipoConexion()+";"+
+                           subestacionesRelacionadas+";"+informacionBasica.getTipoDeLinea()+";"+informacionBasica.getAcuerdoDeConexionCompartida()+";"+capacidad.getVoltajeNominal()+";"+capacidad.getVoltajeMaximo()+";"+
+                           capacidad.getCorrienteNominal()+";"+capacidad.getCorrienteEmergencia()+";"+capacidad.getLimiteTermico()+";"+capacidad.getLongitudTotal()+";"+ubicacion.getDepartamento()+";"+
+                           ubicacion.getMunicipio()+";"+ubicacion.getSubAreaOperativa();
+        
+        return linea;
     }
     
     //getters
-        public Ubicacion getUbicacion(){ return ubicacion; }
+    public Ubicacion getUbicacion(){ return ubicacion; }
+    public Capacidad getCapacidad(){ return capacidad; }
+    public InformacionBasica getInformacionBasica(){ return informacionBasica; }
    
 }

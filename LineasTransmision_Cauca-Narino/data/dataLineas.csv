@@ -40,5 +40,4 @@ JAMONDINO - PIMAMPIRO 4 230 KV;ENLAZA GRUPO ENERGIA BOGOTA SAS ESP;Operación;11
 JAMONDINO - JARDINERA 1 115 kV;CENTRALES ELECTRICAS DE NARIÑO S.A. E.S.P.;Operación;31/10/2018;Uso STR ;JAMONDINO - JARDINERA;Aérea;No;115;115;330;335;900;47;NARIÑO;PASTO;SubArea Cauca-Narino
 CATAMBUCO - JAMONDINO 1 115 kV;CENTRALES ELECTRICAS DE NARIÑO S.A. E.S.P.;Operación;01/01/1992;Uso STR ;CATAMBUCO - JAMONDINO;Aérea;No;115;115;560;560;580;26,5;NARIÑO;PASTO;SubArea Cauca-Narino
 PRINCIPAL (POPAYAN) - RIO MAYO 1 115 kV;COMPAÑIA ENERGETICA DE OCCIDENTE S.A.S. ESP;Operación;01/01/1986; A un STR;PRINCIPAL (POPAYAN) - RIO MAYO;Aérea;Si;115;123;400;440;590;104;CAUCA;POPAYÁN;SubArea Cauca-Narino
-Nombre;Operador;Estado;Fecha de puesta en operación FPO;Tipo uso/conexión;Subestaciones relacionadas;Tipo de línea;¿Hace parte de un acuerdo de conexión compartida?;Voltaje nominal [kV];Voltaje máximo [kV];Corriente nominal [A];Límite de emergencia [A];Límite térmico [A];Longitud total [km];Departamento;Municipio;Subárea
-INFORMACIÓN BÁSICA;;;;;;;;INFORMACIÓN TÉCNICA;;;;;;UBICACIÓN;;
+

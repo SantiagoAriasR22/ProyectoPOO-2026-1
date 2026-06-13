@@ -19,14 +19,6 @@ public class Capacidad {
         this.longitudTotal=longitudTotal;
     }
     
-    public Capacidad(Capacidad capacidad){
-        this.voltajeNominal=capacidad.getVoltajeNominal();
-        this.voltajeMaximo=getVoltajeMaximo();
-        this.corrienteNominal=getCorrienteNominal();
-        this.corrienteEmergencia=getCorrienteEmergencia();
-        this.limiteTermico=capacidad.getLimiteTermico();
-        this.longitudTotal=capacidad.getLongitudTotal();
-    }
    
     //getters
     public double getVoltajeNominal(){ return voltajeNominal; }
