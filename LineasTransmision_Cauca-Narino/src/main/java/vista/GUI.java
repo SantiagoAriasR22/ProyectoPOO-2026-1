@@ -415,17 +415,26 @@ public class GUI extends javax.swing.JFrame {
                 //regex = regular expresions
                 String regex;
             
-                // Si el texto termina en un número (ej. LT-1), aseguramos que termine AHÍ 
-                // y no continúe con más números (evita que LT-1 muestre LT-10)
+                //El .* evalua si hay un caracter escrito sobre el textField, cualquiera, puede ser una letra o un simbolo, pero evalua que haya algo sobre el textField
+                //El \\d evalua si hay un numero despues de la secuencia de caracteres que se haya escrito previamente o del caracter que se haya escrito
+                //El $ lo que hace es evaluar si despues del numero ya se acabo el texto
+                //Si se cumplen las tres condiciones mencionadas anteriormente el if lanza verdadero y entra en el
+                //En pocas palabras, este if se encarga de evaluar si el texto termino en un numero
                 if (textoBusqueda.matches(".*\\d+$")) {
-                    // (?i)^ -> Empieza por el texto
-                    // (?!\\d) -> "Lookahead negativo": No puede haber otro número inmediatamente después
+                    
+                    //la expresion de busqueda va a estar compuesta de la siguiente regla:
+                    //El (?i) lo que hace es que ignora mayusculas/minusculas
+                    //El ^ lo que hace es que la busqueda se haga de manera ordenada de izquierda a derecha, tal cual se escribio en el textField
+                    //El (?!\\) lo que hace es que bloquea la busqueda si el caracter es otro numero, es decir, si busco LT-1, no me va a aparecer LT-10, etc
+                    //el textoBusqueda es el texto al cual se le aplican las reglas anteriormente dichas
+                    //regex es una variable que va ajustando los filtros de busqueda, a medida que se escriben mas letras
                     regex = "(?i)^" + textoBusqueda + "(?!\\d)";
                     
                     //else lo que hace es que filtrar la busqueda si todavia no se ha escrito ningun numero
                 } else {
-                    // Si estás escribiendo letras o el guion (ej. L, LT, LT-), 
-                    // simplemente busca todo lo que empiece por ahí
+                    
+                    //El (?i) lo que hace es que ignora mayusculas/minusculas
+                    //El ^ lo que hace es que la busqueda se haga de manera ordenada de izquierda a derecha, tal cual se escribio en el textField
                     regex = "(?i)^" + textoBusqueda;
                 }
             
