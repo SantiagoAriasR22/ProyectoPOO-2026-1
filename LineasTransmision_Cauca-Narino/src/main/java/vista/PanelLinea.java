@@ -14,20 +14,26 @@ public class PanelLinea extends javax.swing.JPanel {
     public PanelLinea() {
         initComponents();
         llenarTabla();
+        
+        //esta linea se encarga de inicializar el TableRowSorter en la tabla, al pasarle el DefaultTableModel se deja preparado para que el campo de texto de la GUI pueda aplicar los filtros dinamicos
         jTable2.setRowSorter(new javax.swing.table.TableRowSorter<>((javax.swing.table.DefaultTableModel) jTable2.getModel()));
         
     }
     
+    //esta funcion devuelve la tabla jTable2 en donde estan los datos de las lineas de transmision, para que se pueda filtrar la busqueda por ID
     public javax.swing.JTable getJTable2(){
         return jTable2;
     }
     
     public void llenarTabla(){
         
+        //se obtiene la lista de las lineas de transmision mediante el controlador
         lineasTranmision = controlador.obtenerLineaTransmision();
         
+        //se castea el tipo de tabla, porque un Jtable es un componente unicamente visual, el que verdaderamente deja agregar, quitar y editar filas el es DefaultTableModel
         DefaultTableModel modeloTabla = (DefaultTableModel) jTable2.getModel();
         
+        //borra todas las filas que existian previamente para evitar duplicados
         modeloTabla.setRowCount(0);
         
         for(LineaTransmision linea : lineasTranmision){
@@ -37,12 +43,16 @@ public class PanelLinea extends javax.swing.JPanel {
             String voltaje = linea.getCapacidad().getVoltajeNominal()+"Kv";
             String departamento = linea.getUbicacion().getDepartamento();
             
+            //Se crea un vector que representa una fila de la tabla, donde los datos van en el orden exacto de las columnas
             Object[] fila = new Object[]{ id, nombre, voltaje, departamento };
             
+            //agrega la fila recien creada a la tabla 
             modeloTabla.addRow(fila);
         }
   
-        llenarEtiquetas(lineasTranmision.get(0));
+        if(!lineasTranmision.isEmpty()){
+            llenarEtiquetas(lineasTranmision.get(0));
+        }
          
     }
     
@@ -299,6 +309,8 @@ public class PanelLinea extends javax.swing.JPanel {
         //se valida que el numero de fila sea valido, por si el usuario da click en algun otro lugar y se activa el evento
         if(filaSeleccionada != -1){
             
+            //esta linea de codigo lo que hace es que como a veces el indice visual no va a coincidir con el indice del arraylist debido a la busqueda por id
+            //entonces esta linea que hace es traducir ese indice visual al verdadero indice que esta en el arraylist
             int filaReal = jTable2.convertRowIndexToModel(filaSeleccionada);
         
             //se busca en el array lineasTransmision la linea seleccionada por medio de su posicion (ya que tanto en el array como en la tabla tienen el mismo indice)

@@ -28,6 +28,7 @@ public class Lectura {
 
             while ((s = br.readLine()) != null) {
                 
+                //sirve para validar que cuando haya lineas en blanco el programa no se explote
                 if (s.trim().isEmpty()) continue;
 
                 String token[] = s.split(";");
@@ -62,6 +63,7 @@ public class Lectura {
             
             while((s=br.readLine())!=null){
                 
+                //sirve para validar que cuando haya lineas en blanco el programa no se explote
                 if (s.trim().isEmpty()) continue;
                
                 String token[] = s.split(";");

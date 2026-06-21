@@ -165,7 +165,7 @@ public class GUI extends javax.swing.JFrame {
                 .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(395, Short.MAX_VALUE))
+                .addContainerGap(360, Short.MAX_VALUE))
         );
 
         jPanel11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
@@ -209,7 +209,7 @@ public class GUI extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -240,7 +240,7 @@ public class GUI extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 379, Short.MAX_VALUE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 343, Short.MAX_VALUE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -248,7 +248,7 @@ public class GUI extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addComponent(jLabel8)
                 .addContainerGap())
         );
@@ -275,7 +275,7 @@ public class GUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE))
+                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -326,7 +326,7 @@ public class GUI extends javax.swing.JFrame {
                         .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, 1104, Short.MAX_VALUE)
                             .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel14, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(panelContenedor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -366,11 +366,15 @@ public class GUI extends javax.swing.JFrame {
         jLabel9.setText("Longitud total");
         jLabel10.setText(String.format("%.2f KM", contraladorLinea.calcularLongitudTotal()));
     
+        //el removeAll lo que hace es que borra cualquier panel que estuviera abierto antes de presionar el boton
         panelContenedor.removeAll();
         
+        //esta linea lo que hace es agregar el panel panelLinea y se le indica a java que el panel ocupe todo el espacio disponible del centro sin dejar bordes
         panelContenedor.add(panelLinea, java.awt.BorderLayout.CENTER);
     
+        //revalidate le dice a java que recalcule los tamaños y las estructuras de los componentes para que no haya problemas
         panelContenedor.revalidate();
+        //repaint le dice a java que borre todos los pixeles viejos y pinte los nuevos pixeles del panel panelLinea
         panelContenedor.repaint();
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -384,28 +388,46 @@ public class GUI extends javax.swing.JFrame {
 
     private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
         
+        //textoBusqueda recolecta lo que el usuario escribe y elimina los espacios que hay
         String textoBusqueda = jTextField1.getText().trim();
     
+        //aqui se usa tableRowSorter que es un motor de java swing que se encarga de ordenar y filtrar de manera visual las filas de una tabla, sin modificar los datos originales
         javax.swing.table.TableRowSorter sorter = (javax.swing.table.TableRowSorter) panelLinea.getJTable2().getRowSorter();
     
         if (sorter != null) {
+            
+            //este if es para que cuando el text field este vacio, no haya filtros y se muestren todas las filas
             if (textoBusqueda.isEmpty()) {
                 sorter.setRowFilter(null);
             } else {
+                
+                //regex = regular expresions
                 String regex;
             
-                // Si el texto termina en un número (ej. LT-1), aseguramos que termine AHÍ 
-                // y no continúe con más números (evita que LT-1 muestre LT-10)
+                //El .* evalua si hay un caracter escrito sobre el textField, cualquiera, puede ser una letra o un simbolo, pero evalua que haya algo sobre el textField
+                //El \\d evalua si hay un numero despues de la secuencia de caracteres que se haya escrito previamente o del caracter que se haya escrito
+                //El $ lo que hace es evaluar si despues del numero ya se acabo el texto
+                //Si se cumplen las tres condiciones mencionadas anteriormente el if lanza verdadero y entra en el
+                //En pocas palabras, este if se encarga de evaluar si el texto termino en un numero
                 if (textoBusqueda.matches(".*\\d+$")) {
-                    // (?i)^ -> Empieza por el texto
-                    // (?!\\d) -> "Lookahead negativo": No puede haber otro número inmediatamente después
+                    
+                    //la expresion de busqueda va a estar compuesta de la siguiente regla:
+                    //El (?i) lo que hace es que ignora mayusculas/minusculas
+                    //El ^ lo que hace es que la busqueda se haga de manera ordenada de izquierda a derecha, tal cual se escribio en el textField
+                    //El (?!\\) lo que hace es que bloquea la busqueda si el caracter es otro numero, es decir, si busco LT-1, no me va a aparecer LT-10, etc
+                    //el textoBusqueda es el texto al cual se le aplican las reglas anteriormente dichas
+                    //regex es una variable que va ajustando los filtros de busqueda, a medida que se escriben mas letras
                     regex = "(?i)^" + textoBusqueda + "(?!\\d)";
+                    
+                    //else lo que hace es que filtrar la busqueda si todavia no se ha escrito ningun numero
                 } else {
-                    // Si estás escribiendo letras o el guion (ej. L, LT, LT-), 
-                    // simplemente busca todo lo que empiece por ahí
+                    
+                    //El (?i) lo que hace es que ignora mayusculas/minusculas
+                    //El ^ lo que hace es que la busqueda se haga de manera ordenada de izquierda a derecha, tal cual se escribio en el textField
                     regex = "(?i)^" + textoBusqueda;
                 }
             
+                //Esta linea lo que hace es aplicar el filtro de busqueda que se establecio en regex y lo aplica unicamente a la columna de las ID que es lo que nos interesa 
                 sorter.setRowFilter(javax.swing.RowFilter.regexFilter(regex, 0));
             }
         }
