@@ -51,7 +51,7 @@ public class PanelLinea extends javax.swing.JPanel {
         }
   
         if(!lineasTranmision.isEmpty()){
-            llenarEtiquetas(lineasTranmision.get(0));
+        llenarEtiquetas(lineasTranmision.get(0));
         }
          
     }
@@ -289,7 +289,7 @@ public class PanelLinea extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 997, Short.MAX_VALUE)
+                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1282, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(

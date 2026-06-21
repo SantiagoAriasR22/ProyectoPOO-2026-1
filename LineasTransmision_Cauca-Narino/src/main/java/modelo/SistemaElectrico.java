@@ -57,7 +57,7 @@ public class SistemaElectrico {
     }
 
     public ArrayList<LineaTransmision> getLineasActivas(){ return lineasActivas; }
-    public ArrayList<Subestacion> getSubestacions(){ return subestacionesActivas; }
+    public ArrayList<Subestacion> getSubestacionesActivas(){ return subestacionesActivas; }
     public void eliminarLineaActiva(LineaTransmision lineaTransmision){ lineasActivas.remove(lineaTransmision); }
     public void eliminarSubestacionActiva(Subestacion subestacion){ subestacionesActivas.remove(subestacion); }
     public void agregarLineasActivas(LineaTransmision lineaTransmision){ lineasActivas.add(lineaTransmision); }
