@@ -18,7 +18,7 @@ public class Lectura {
     private int numeroDeSubestacion=0;
     private SistemaElectrico sistemaElectrico = new SistemaElectrico();
     
-    void lecturaLineasDeTransmision() {
+    public void lecturaLineasDeTransmision() {
 
         File in = new File("data\\dataLineas.csv");
 
@@ -27,6 +27,8 @@ public class Lectura {
             String s;
 
             while ((s = br.readLine()) != null) {
+                
+                if (s.trim().isEmpty()) continue;
 
                 String token[] = s.split(";");
                 String subestacionRelacionada=token[5]; //se define un string que va a guardar las subestaciones relacionadas a la linea de transmision, para despues splitear cada subestacion y guardarla por individual en un arraylist
@@ -50,7 +52,7 @@ public class Lectura {
         }
     }
     
-    void lecturaSubestaciones(){
+    public void lecturaSubestaciones(){
         
         File in = new File("data\\dataSubestaciones.csv");
         
@@ -59,6 +61,8 @@ public class Lectura {
             String s;
             
             while((s=br.readLine())!=null){
+                
+                if (s.trim().isEmpty()) continue;
                
                 String token[] = s.split(";");
                 String voltajeNominal=token[1]; //se define un String que guarda los voltajes nominales que tiene la subestacion porque a veces son mas de 1

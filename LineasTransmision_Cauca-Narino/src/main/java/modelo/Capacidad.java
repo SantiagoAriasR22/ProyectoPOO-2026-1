@@ -19,6 +19,14 @@ public class Capacidad {
         this.longitudTotal=longitudTotal;
     }
     
+    public double calcularCapacidadMW(){
+        
+        double pf=0.95;
+        
+        double capacidad = (Math.sqrt(3)*this.voltajeNominal*this.corrienteNominal/1000)*pf;
+        
+        return Math.round(capacidad * 100.0) / 100.0;
+    }
    
     //getters
     public double getVoltajeNominal(){ return voltajeNominal; }

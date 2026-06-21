@@ -1,6 +1,7 @@
 package modelo;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class InformacionBasica {
     
@@ -10,11 +11,11 @@ public class InformacionBasica {
     private String operador;
     private String FPO;
     private String tipoDeConexion;
-    private ArrayList<String> subestacionesRelacionadas;
+    private ArrayList<String> subestacionesRelacionadas = new ArrayList<>();
     private String tipoDeLinea;
     private String acuerdoDeConexionCompartida;
     
-    public InformacionBasica(String id, String nombre, String estado, String operador, String FPO, String tipoDeConexion, ArrayList subestacionesRelacionadas, String tipoDeLinea, String acuerdoDeConexionCompartida){
+    public InformacionBasica(String id, String nombre, String operador, String estado, String FPO, String tipoDeConexion, ArrayList subestacionesRelacionadas, String tipoDeLinea, String acuerdoDeConexionCompartida){
         this.id=id;
         this.nombre=nombre;
         this.estado=estado;
@@ -33,7 +34,10 @@ public class InformacionBasica {
     public String getOperador(){ return operador; }
     public String getFPO(){ return FPO; }
     public String getTipoConexion(){ return tipoDeConexion; }
-    public ArrayList getSubestacionesRelacionadas(){ return subestacionesRelacionadas; }
+    public String getSubestacionesRelacionadas(){ 
+        String subestaciones = String.join(" - ", this.subestacionesRelacionadas);
+        return subestaciones;
+    }
     public String getTipoDeLinea(){ return tipoDeLinea; }
     public String getAcuerdoDeConexionCompartida(){ return acuerdoDeConexionCompartida; }
     
