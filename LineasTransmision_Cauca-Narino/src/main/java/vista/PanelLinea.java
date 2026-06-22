@@ -53,6 +53,7 @@ public class PanelLinea extends javax.swing.JPanel {
         if(!lineasTranmision.isEmpty()){
         llenarEtiquetas(lineasTranmision.get(0));
         }
+        
          
     }
     

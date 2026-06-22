@@ -6,6 +6,9 @@ package vista;
 
 import controlador.ContraladorSubestacion;
 import controlador.ControladorLinea;
+import java.util.ArrayList;
+import modelo.LineaTransmision;
+import persistencia.Escritura;
 
 /**
  *
@@ -18,6 +21,7 @@ public class GUI extends javax.swing.JFrame {
     private ContraladorSubestacion contraladorSubE = new ContraladorSubestacion();
     private PanelLinea panelLinea = new PanelLinea();
     private PanelSubEstacion panelSubE = new PanelSubEstacion();
+    private String idSelec;
     
     //aqui se usa tableRowSorter que es un motor de java swing que se encarga de ordenar y filtrar de manera visual las filas de una tabla, sin modificar los datos originales
     private javax.swing.table.TableRowSorter sorter = (javax.swing.table.TableRowSorter) panelLinea.getJTable2().getRowSorter();
@@ -28,7 +32,16 @@ public class GUI extends javax.swing.JFrame {
     
     private void aplicarFiltros() {
     
-        activarPanelLineas();
+  
+        //DECLARAMOS SORTER FUERA DEL CONDICIONAL PARA ASIGNARLE UN VALOR SEGUN LA TABLA ABIERTA
+        javax.swing.table.TableRowSorter<?> sorter = null;
+        //usamos el if else if para asignarle un valor al sorter
+        if(panelLinea.getJTable2().isShowing()){
+        sorter = (javax.swing.table.TableRowSorter) panelLinea.getJTable2().getRowSorter();
+        }
+        else if(panelSubE.getJTable1().isShowing()){
+        sorter = (javax.swing.table.TableRowSorter) panelSubE.getJTable1().getRowSorter(); 
+        }
         
         if (sorter != null) {
         
@@ -38,7 +51,7 @@ public class GUI extends javax.swing.JFrame {
             java.util.List<javax.swing.RowFilter<Object, Object>> listaFiltros = new java.util.ArrayList<>();
 
             //textoBusqueda recolecta lo que el usuario escribe y elimina los espacios que hay
-            String textoBusqueda = jTextField1.getText().trim();
+           String textoBusqueda = jTextField1.getText().trim();
             
             //este if es para que cuando el text field este vacio, no haya filtros y se muestren todas las filas
             if (!textoBusqueda.isEmpty()) {
@@ -123,7 +136,12 @@ public class GUI extends javax.swing.JFrame {
     
                 //Se crea el filtro y se aplica a la columna de Departamentos
                 //Finalmente, se suma a la lista de filtros acumulados
+                if(panelLinea.getJTable2().isShowing()){
                 listaFiltros.add(javax.swing.RowFilter.regexFilter(regexDepto, 3));
+                }
+                else{
+                listaFiltros.add(javax.swing.RowFilter.regexFilter(regexDepto, 2));
+                }
             }
 
             if (listaFiltros.isEmpty()) {
@@ -149,17 +167,7 @@ public class GUI extends javax.swing.JFrame {
         jLabel10.setVisible(true);
         jPanel2.setVisible(true); 
         jPanel3.setVisible(true);
-        
-        sorter.setRowFilter(null);
-        jLabel4.setText("Lineas de Transmision");
-        jLabel5.setText("Total de Lineas");
-        jLabel6.setText(contraladorLinea.obtenerNumeroDeLineas()+"");
-        jLabel7.setText("Capacidad Total");
-        jLabel8.setText(String.format("%.2f MW", contraladorLinea.calcularCapacidadTotal(panelLinea.getJTable2())));
-        jLabel9.setText("Longitud total");
-        jLabel10.setText(String.format("%.2f KM", contraladorLinea.calcularLongitudTotal(panelLinea.getJTable2())));
-    
-        //el removeAll lo que hace es que borra cualquier panel que estuviera abierto antes de presionar el boton
+                //el removeAll lo que hace es que borra cualquier panel que estuviera abierto antes de presionar el boton
         panelContenedor.removeAll();
         
         //esta linea lo que hace es agregar el panel panelLinea y se le indica a java que el panel ocupe todo el espacio disponible del centro sin dejar bordes
@@ -169,6 +177,16 @@ public class GUI extends javax.swing.JFrame {
         panelContenedor.revalidate();
         //repaint le dice a java que borre todos los pixeles viejos y pinte los nuevos pixeles del panel panelLinea
         panelContenedor.repaint();
+        sorter.setRowFilter(null);
+        jLabel4.setText("Lineas de Transmision");
+        jLabel5.setText("Total de Lineas");
+        jLabel6.setText(contraladorLinea.obtenerNumeroDeLineas()+"");
+        jLabel7.setText("Capacidad Total");
+        jLabel8.setText(String.format("%.2f MW", contraladorLinea.calcularCapacidadTotal(panelLinea.getJTable2())));
+        jLabel9.setText("Longitud total");
+        jLabel10.setText(String.format("%.2f KM", contraladorLinea.calcularLongitudTotal(panelLinea.getJTable2())));
+    
+
     }
 
     @SuppressWarnings("unchecked")
@@ -188,6 +206,10 @@ public class GUI extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         jButton11 = new javax.swing.JButton();
         jButton12 = new javax.swing.JButton();
+        jLabel17 = new javax.swing.JLabel();
+        jButton13 = new javax.swing.JButton();
+        jButton14 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jPanel11 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jPanel12 = new javax.swing.JPanel();
@@ -277,6 +299,19 @@ public class GUI extends javax.swing.JFrame {
         jButton12.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton12.setText("Subestaciones");
 
+        jLabel17.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel17.setText("Eliminar");
+
+        jButton13.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jButton13.setText("Lineas");
+        jButton13.addActionListener(this::jButton13ActionPerformed);
+
+        jButton14.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jButton14.setText("Subestaciones");
+
+        jButton1.setText("CONFIRMAR");
+        jButton1.addActionListener(this::jButton1ActionPerformed);
+
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
@@ -290,8 +325,19 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
                     .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel10Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jButton14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -308,9 +354,20 @@ public class GUI extends javax.swing.JFrame {
                 .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(47, 47, 47)
+                .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(363, Short.MAX_VALUE))
+                .addGap(52, 52, 52)
+                .addComponent(jButton1)
+                .addContainerGap(161, Short.MAX_VALUE))
+            .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel10Layout.createSequentialGroup()
+                    .addGap(263, 263, 263)
+                    .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(353, Short.MAX_VALUE)))
         );
 
         jPanel11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
@@ -524,9 +581,7 @@ public class GUI extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-        jLabel4.setText("SubEstaciones");
-        jLabel5.setText("Total de SubEstaciones");
-        jLabel6.setText(contraladorSubE.obtenerNumeroDeSubestaciones()+"");
+
         //borra los paneles donde estaba anteriormente la carga total y longitud recorrida
         jLabel7.setVisible(false);
         jLabel8.setVisible(false);
@@ -534,6 +589,13 @@ public class GUI extends javax.swing.JFrame {
         jLabel10.setVisible(false);
         jPanel2.setVisible(false); 
         jPanel3.setVisible(false);
+                //borro el combobox de voltaje nominal
+        jComboBox4.setVisible(false);
+        jLabel4.setText("SubEstaciones");
+        jLabel5.setText("Total de SubEstaciones");
+        jLabel6.setText(contraladorSubE.obtenerNumeroDeSubestaciones()+"");
+        sorter.setRowFilter(null);
+
         panelContenedor.removeAll();
         
         panelContenedor.add(panelSubE, java.awt.BorderLayout.CENTER);
@@ -556,6 +618,54 @@ public class GUI extends javax.swing.JFrame {
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         aplicarFiltros();
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+        // TODO add your handling code here:
+        //activa el panel de lineas para seleccionar la de borrar
+        activarPanelLineas();
+       
+    }//GEN-LAST:event_jButton13ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        //este es el boton confirmar asi q haria falta desasctivar el botona  menos que le de a eliminar lineas, ya q esta activo todo el tiempo, se me olvido
+        //creamos el objeto para luego eliminarlo del arraylist
+        LineaTransmision indextemp=null;
+         int filaSeleccionada = panelLinea.getJTable2().getSelectedRow();
+    
+    // Si no hay ninguna fila seleccionada, devolvemos 
+    if (filaSeleccionada == -1) {
+        return;
+    }
+    
+   
+    // de la vista al índice real del modelo para no pasar el dato equivocado.
+    int filaModelo = panelLinea.getJTable2().convertRowIndexToModel(filaSeleccionada);
+    
+    //con esto hallamos la id de la linea seleccionada
+    idSelec = panelLinea.getJTable2().getModel().getValueAt(filaModelo, 0).toString();
+       
+        /*creamos arraylist temporal para eliminar linea y pasarlo a reescribir el csv*/
+                ArrayList<LineaTransmision> temp = new ArrayList<>();
+        temp=contraladorLinea.obtenerLineaTransmision();
+        for(LineaTransmision index: temp){
+            if(index.getInformacionBasica().getID().equals(idSelec)){
+        indextemp=index;
+            }
+        }
+        //toca esperar a terminar el for each para poder eliminar el objeto pq lanza erroe si intentas eliminarlo dentro del ciclo, poe eso se crea la variable temp de indextemp
+        temp.remove(indextemp);
+        Escritura.actualizarArchivoLineasDeTransmision(temp);
+            //usado el llenar tabla para actualizar la tabla en tiempo real
+        panelLinea.llenarTabla();
+        //usados para actualizar los valores de longitud y capacidad en tiempo real
+        jLabel5.setText("Total de Lineas");
+        jLabel6.setText(contraladorLinea.obtenerNumeroDeLineas()+"");
+        jLabel7.setText("Capacidad Total");
+        jLabel8.setText(String.format("%.2f MW", contraladorLinea.calcularCapacidadTotal(panelLinea.getJTable2())));
+        jLabel9.setText("Longitud total");
+        jLabel10.setText(String.format("%.2f KM", contraladorLinea.calcularLongitudTotal(panelLinea.getJTable2())));
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -583,8 +693,11 @@ public class GUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
+    private javax.swing.JButton jButton13;
+    private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton9;
@@ -595,6 +708,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
